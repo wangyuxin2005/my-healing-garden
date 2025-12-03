@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>情绪疗愈花园 | 你值得被温柔以待</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf9 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.92);
+            border-radius: 24px;
+            box-shadow: 0 15px 50px rgba(100, 149, 237, 0.25);
+            overflow: hidden;
+            position: relative;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(173, 216, 230, 0.5);
+        }
+
+        /* 装饰元素 */
+        .floating {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            z-index: 0;
+        }
+
+        .floating:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 10%;
+            left: 5%;
+            animation: float 15s infinite ease-in-out;
+        }
+
+        .floating:nth-child(2) {
+            width: 60px;
+            height: 60px;
+            top: 70%;
+            right: 8%;
+            animation: float 18s infinite ease-in-out;
+            animation-delay: 2s;
+        }
+
+        .floating:nth-child(3) {
+            width: 100px;
+            height: 100px;
+            bottom: 15%;
+            left: 15%;
+            animation: float 20s infinite ease-in-out;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(20px, -30px); }
+            50% { transform: translate(-15px, 20px); }
+            75% { transform: translate(10px, 15px); }
+        }
+
+        /* 主要内容 */
+        .content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #4a6fa5;
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
+            background: linear-gradient(45deg, #6a89cc, #4a6fa5);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .subtitle {
+            color: #6c757d;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .affirmation-box {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border-radius: 20px;
+            padding: 25px;
+            margin: 30px 0;
+            box-shadow: 0 8px 20px rgba(100, 149, 237, 0.2);
+            border: 2px dashed #90caf9;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .affirmation-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(100, 149, 237, 0.3);
+        }
+
+        .affirmation-text {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            font-weight: 600;
+            line-height: 1.4;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #6a89cc, #4a6fa5);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+            color: #5a4a42;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        .breathing-container {
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 20px;
+            display: none;
+        }
+
+        .breathing-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #a8edea, #fed6e3);
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #5a4a42;
+            box-shadow: 0 10px 30px rgba(168, 237, 234, 0.5);
+            transition: all 2s ease-in-out;
+        }
+
+        .breathing-instruction {
+            font-size: 1.3rem;
+            color: #4a6fa5;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .quote-container {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 20px;
+            display: none;
+        }
+
+        .quote-text {
+            font-size: 1.4rem;
+            font-style: italic;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .quote-author {
+            font-size: 1.1rem;
+            color: #6a89cc;
+            font-weight: 600;
+        }
+
+        /* 新增：倾诉角落 */
+        .confession-section {
+            margin: 35px 0;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 20px;
+            border: 2px solid #e0e0e0;
+        }
+
+        .confession-title {
+            font-size: 1.5rem;
+            color: #4a6fa5;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .confession-input {
+            width: 100%;
+            height: 120px;
+            padding: 15px;
+            border: 2px solid #bbdefb;
+            border-radius: 16px;
+            font-size: 1.1rem;
+            resize: none;
+            margin-bottom: 15px;
+            transition: border-color 0.3s;
+        }
+
+        .confession-input:focus {
+            outline: none;
+            border-color: #6a89cc;
+            box-shadow: 0 0 0 3px rgba(106, 137, 204, 0.2);
+        }
+
+        .confession-response {
+            min-height: 100px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 16px;
+            font-size: 1.2rem;
+            color: #2c3e50;
+            line-height: 1.6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            opacity: 0.8;
+        }
+
+        .confession-response.show {
+            opacity: 1;
+            font-weight: 500;
+        }
+
+        .footer {
+            margin-top: 30px;
+            color: #6c757d;
+            font-size: 0.95rem;
+            padding-top: 20px;
+            border-top: 1px solid #e9ecef;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .affirmation-text {
+                font-size: 1.5rem;
+                min-height: 100px;
+            }
+            
+            .btn {
+                padding: 12px 20px;
+                font-size: 1rem;
+            }
+            
+            .breathing-circle {
+                width: 120px;
+                height: 120px;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .affirmation-text {
+                font-size: 1.3rem;
+            }
+            
+            .buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 80%;
+            }
+            
+            .confession-input {
+                height: 100px;
+            }
+        }
+
+        /* 动画效果 */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #ffd700;
+            border-radius: 50%;
+            opacity: 0.7;
+            box-shadow: 0 0 10px #ffd700;
+        }
+    </style>
+</head>
+<body>
+    <!-- 装饰性浮动元素 -->
+    <div class="floating"></div>
+    <div class="floating"></div>
+    <div class="floating"></div>
+
+    <div class="container">
+        <div class="content">
+            <h1>情绪疗愈花园</h1>
+            <p class="subtitle">在这里，你的感受被看见、被理解、被珍视。深呼吸，让温暖与力量慢慢注入你的心。</p>
+            
+            <div class="affirmation-box">
+                <div id="affirmationText" class="affirmation-text pulse">
+                    你此刻的感受是真实的，但不会永远如此。
+                </div>
+            </div>
+            
+            <div class="buttons">
+                <button id="newAffirmationBtn" class="btn btn-primary">
+                    <i class="fas fa-sparkles"></i> 新的鼓励
+                </button>
+                <button id="breathingBtn" class="btn btn-secondary">
+                    <i class="fas fa-wind"></i> 呼吸练习
+                </button>
+                <button id="quoteBtn" class="btn btn-primary">
+                    <i class="fas fa-quote-right"></i> 智慧语录
+                </button>
+            </div>
+            
+            <div class="confession-section">
+                <div class="confession-title">
+                    <i class="fas fa-feather-alt"></i> 倾诉角落
+                </div>
+                <textarea id="userInput" class="confession-input" placeholder="在这里写下你的烦恼、困惑或心情...（例如：工作压力好大 / 感觉没人理解我）"></textarea>
+                <div id="responseBox" class="confession-response">
+                    我在这里倾听你 ❤️
+                </div>
+            </div>
+            
+            <div id="breathingContainer" class="breathing-container">
+                <div class="breathing-instruction" id="breathingInstruction">深吸气...</div>
+                <div class="breathing-circle" id="breathingCircle">吸气</div>
+            </div>
+            
+            <div id="quoteContainer" class="quote-container">
+                <div class="quote-text" id="quoteText">"即使是最黑暗的夜晚也会迎来黎明。"</div>
+                <div class="quote-author" id="quoteAuthor">— 维克多·雨果</div>
+            </div>
+            
+            <div class="footer">
+                <p>你并不孤单。如果情绪持续困扰你，请考虑联系信任的人或专业心理咨询师。</p>
+                <p style="margin-top: 10px; font-size: 0.9rem; color: #4a6fa5;">
+                    <i class="fas fa-heart" style="color: #ff6b6b;"></i> 
+                    这个空间永远为你敞开
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 积极肯定语库
+        const affirmations = [
+            "你此刻的感受是真实的，但不会永远如此。",
+            "你已经做得很好了，给自己一点温柔。",
+            "困难只是暂时的，你有足够的力量度过。",
+            "允许自己休息，这不是软弱而是智慧。",
+            "你的存在本身就有价值，无需证明。",
+            "今天的小进步，都是明天成功的基石。",
+            "你值得被爱，也值得拥有快乐。",
+            "每一次呼吸都在为你注入新的能量。",
+            "你不是一个人在战斗，我们都在这里支持你。",
+            "阴天过后，阳光总会重新照耀大地。",
+            "你的感受很重要，请好好照顾自己。",
+            "慢慢来，每一步都算数。",
+            "你比自己想象的更坚强、更有韧性。",
+            "允许自己有不完美的时刻，这很正常。",
+            "世界因你的存在而更加美好。"
+        ];
+
+        // 名人名言库
+        const quotes = [
+            {
+                text: "即使是最黑暗的夜晚也会迎来黎明。",
+                author: "维克多·雨果"
+            },
+            {
+                text: "生活不可能像你想象得那么好，但也不会像你想象得那么糟。",
+                author: "莫泊桑"
+            },
+            {
+                text: "希望是坚韧的拐杖，忍耐是旅行袋，携带它们，人可以登上永恒之旅。",
+                author: "罗素"
+            },
+            {
+                text: "不要因为走得太远，忘了我们为什么出发。",
+                author: "安德烈·纪德"
+            },
+            {
+                text: "世界上只有一种真正的英雄主义，那就是在认清生活真相之后依然热爱生活。",
+                author: "罗曼·罗兰"
+            },
+            {
+                text: "你生命中最重要的一天就是今天。",
+                author: "戴尔·卡耐基"
+            },
+            {
+                text: "生活总是让我们遍体鳞伤，但到后来，那些受伤的地方一定会变成我们最强壮的地方。",
+                author: "海明威"
+            },
+            {
+                text: "无论你遇到谁，他都是对的人；无论发生什么事，那都是唯一会发生的事。",
+                author: "《牧羊少年奇幻之旅》"
+            }
+        ];
+
+        // 安慰响应规则（关键词匹配）
+        const responseRules = [
+            {
+                keywords: ['孤独', '孤单', '没人', '理解', '懂我'],
+                responses: [
+                    "你并不孤单，此刻我就在这里陪着你。世界很大，总有人愿意倾听和理解你。",
+                    "感到不被理解是很痛苦的，但请相信，你的独特和珍贵不需要他人认可才成立。",
+                    "有时候孤独感会特别强烈，但请记得：你值得被看见、被珍惜。试着向信任的人迈出一小步？"
+                ]
+            },
+            {
+                keywords: ['压力', '累', '疲惫', '撑不住', '崩溃'],
+                responses: [
+                    "亲爱的，你已经很努力了。允许自己停下来休息，这不是放弃，而是为了走得更远。",
+                    "压力山大的时候，不妨做三次深呼吸，告诉自己：'我已经做得够好了'。",
+                    "你不需要一个人扛下所有。寻求帮助是勇敢的表现，而不是软弱。"
+                ]
+            },
+            {
+                keywords: ['失败', '搞砸', '错误', '不行', '没用'],
+                responses: [
+                    "犯错和失败是成长的一部分。每一次跌倒，都是为下一次飞跃积蓄力量。",
+                    "你不是'没用'，你只是正在经历一段艰难时光。给自己多一点耐心和宽容吧。",
+                    "人生没有白走的路，每一个'错误'都在教你重要的功课。你已经在进步了！"
+                ]
+            },
+            {
+                keywords: ['焦虑', '担心', '害怕', '恐惧', '不安'],
+                responses: [
+                    "焦虑的感觉很真实，但它并不代表现实。试着把注意力拉回当下，感受你的呼吸。",
+                    "害怕的时候，就想象有一束温暖的光包裹着你，给你安全和勇气。",
+                    "你不需要立刻解决所有问题。一次只处理一件小事，就已经很棒了。"
+                ]
+            },
+            {
+                keywords: ['悲伤', '难过', '伤心', '痛苦', '心碎'],
+                responses: [
+                    "允许自己悲伤，眼泪是心灵的雨水，洗去尘埃后才能看见希望的彩虹。",
+                    "心痛的时候，抱抱自己吧。你值得被温柔对待，尤其是被你自己。",
+                    "悲伤不会永远停留，就像乌云终会散去。此刻，我在这里陪着你。"
+                ]
+            },
+            {
+                keywords: ['未来', '迷茫', '不知道', '方向', '选择'],
+                responses: [
+                    "迷茫是探索的开始。不必看清整条路，只要迈出下一步就好。",
+                    "你不需要马上知道所有答案。跟随内心的微光，它会带你去该去的地方。",
+                    "人生没有标准答案，你的路独一无二。相信自己的节奏，慢慢来。"
+                ]
+            }
+        ];
+
+        // 默认安慰语（当没有匹配关键词时）
+        const defaultResponses = [
+            "谢谢你愿意分享。你的感受很重要，我在这里认真听着呢。",
+            "无论你正在经历什么，请记住：你值得被温柔以待，包括被你自己。",
+            "说出来就已经很勇敢了。接下来，我们一起面对，好吗？",
+            "你的烦恼我收到了。虽然我不能立刻解决问题，但我会一直在这里支持你。",
+            "感谢你的信任。记住：情绪会流动，阴霾终会散去，而你会变得更强大。"
+        ];
+
+        // DOM元素
+        const affirmationText = document.getElementById('affirmationText');
+        const newAffirmationBtn = document.getElementById('newAffirmationBtn');
+        const breathingBtn = document.getElementById('breathingBtn');
+        const quoteBtn = document.getElementById('quoteBtn');
+        const breathingContainer = document.getElementById('breathingContainer');
+        const breathingCircle = document.getElementById('breathingCircle');
+        const breathingInstruction = document.getElementById('breathingInstruction');
+        const quoteContainer = document.getElementById('quoteContainer');
+        const quoteText = document.getElementById('quoteText');
+        const quoteAuthor = document.getElementById('quoteAuthor');
+        const userInput = document.getElementById('userInput');
+        const responseBox = document.getElementById('responseBox');
+
+        // 初始化：显示随机肯定语
+        function getRandomAffirmation() {
+            const randomIndex = Math.floor(Math.random() * affirmations.length);
+            return affirmations[randomIndex];
+        }
+
+        // 显示新的肯定语
+        newAffirmationBtn.addEventListener('click', () => {
+            affirmationText.textContent = getRandomAffirmation();
+            // 添加脉冲动画
+            affirmationText.classList.remove('pulse');
+            void affirmationText.offsetWidth; // 触发重排
+            affirmationText.classList.add('pulse');
+        });
+
+        // 呼吸练习功能
+        let breathingInterval;
+        let isBreathing = false;
+
+        breathingBtn.addEventListener('click', () => {
+            if (!isBreathing) {
+                startBreathingExercise();
+                breathingBtn.innerHTML = '<i class="fas fa-stop"></i> 停止练习';
+                breathingBtn.classList.remove('btn-secondary');
+                breathingBtn.classList.add('btn-primary');
+                isBreathing = true;
+            } else {
+                stopBreathingExercise();
+                breathingBtn.innerHTML = '<i class="fas fa-wind"></i> 呼吸练习';
+                breathingBtn.classList.remove('btn-primary');
+                breathingBtn.classList.add('btn-secondary');
+                isBreathing = false;
+            }
+        });
+
+        function startBreathingExercise() {
+            breathingContainer.style.display = 'block';
+            let phase = 0; // 0: 吸气, 1: 屏息, 2: 呼气, 3: 屏息
+            
+            breathingInterval = setInterval(() => {
+                switch(phase) {
+                    case 0:
+                        breathingInstruction.textContent = '深吸气...';
+                        breathingCircle.textContent = '吸气';
+                        breathingCircle.style.transform = 'scale(1.3)';
+                        breathingCircle.style.backgroundColor = '#a8edea';
+                        break;
+                    case 1:
+                        breathingInstruction.textContent = '屏住呼吸...';
+                        breathingCircle.textContent = '屏息';
+                        breathingCircle.style.backgroundColor = '#d4fc79';
+                        break;
+                    case 2:
+                        breathingInstruction.textContent = '缓慢呼气...';
+                        breathingCircle.textContent = '呼气';
+                        breathingCircle.style.transform = 'scale(0.8)';
+                        breathingCircle.style.backgroundColor = '#fed6e3';
+                        break;
+                    case 3:
+                        breathingInstruction.textContent = '放松...';
+                        breathingCircle.textContent = '放松';
+                        breathingCircle.style.transform = 'scale(1)';
+                        breathingCircle.style.backgroundColor = '#a8edea';
+                        break;
+                }
+                phase = (phase + 1) % 4;
+            }, 4000);
+        }
+
+        function stopBreathingExercise() {
+            clearInterval(breathingInterval);
+            breathingContainer.style.display = 'none';
+        }
+
+        // 显示随机名言
+        quoteBtn.addEventListener('click', () => {
+            if (quoteContainer.style.display === 'none' || quoteContainer.style.display === '') {
+                const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+                quoteText.textContent = `"${randomQuote.text}"`;
+                quoteAuthor.textContent = `— ${randomQuote.author}`;
+                quoteContainer.style.display = 'block';
+                quoteBtn.innerHTML = '<i class="fas fa-times"></i> 隐藏语录';
+            } else {
+                quoteContainer.style.display = 'none';
+                quoteBtn.innerHTML = '<i class="fas fa-quote-right"></i> 智慧语录';
+            }
+        });
+
+        // 处理用户输入的烦恼
+        userInput.addEventListener('input', () => {
+            const input = userInput.value.trim().toLowerCase();
+            
+            if (input === '') {
+                responseBox.textContent = '我在这里倾听你 ❤️';
+                responseBox.classList.remove('show');
+                return;
+            }
+            
+            // 查找匹配的响应
+            let matchedResponse = null;
+            
+            for (const rule of responseRules) {
+                for (const keyword of rule.keywords) {
+                    if (input.includes(keyword)) {
+                        const randomIndex = Math.floor(Math.random() * rule.responses.length);
+                        matchedResponse = rule.responses[randomIndex];
+                        break;
+                    }
+                }
+                if (matchedResponse) break;
+            }
+            
+            // 如果没有匹配，则使用默认安慰语
+            if (!matchedResponse) {
+                const randomIndex = Math.floor(Math.random() * defaultResponses.length);
+                matchedResponse = defaultResponses[randomIndex];
+            }
+            
+            responseBox.textContent = matchedResponse;
+            responseBox.classList.add('show');
+        });
+
+        // 页面加载时添加一些小动画
+        window.addEventListener('load', () => {
+            // 创建闪烁星星效果
+            createSparkles();
+            
+            // 初始肯定语
+            affirmationText.textContent = getRandomAffirmation();
+        });
+
+        // 创建闪烁星星
+        function createSparkles() {
+            const container = document.querySelector('.container');
+            for (let i = 0; i < 15; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.classList.add('sparkle');
+                sparkle.style.left = Math.random() * 100 + '%';
+                sparkle.style.top = Math.random() * 100 + '%';
+                sparkle.style.animation = `pulse ${Math.random() * 3 + 2}s infinite`;
+                container.appendChild(sparkle);
+            }
+        }
+    </script>
+</body>
+</html>
